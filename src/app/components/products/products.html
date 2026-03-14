@@ -1,0 +1,44 @@
+<app-header (text)="handleSearch($event)"></app-header>
+@if (isLoading()){
+  <div class="text-center my-5">
+    <div class="spinner-border text-primary"></div>
+    <p>Loading Products...</p>
+  </div>
+} @else {
+  <div class="row row-cols-1 row-cols-md-4 g-4 m-5">
+    @for (product of products()?.data; track product.product_id){
+      <div class="col">
+        <div class="card h-100" [routerLink]="['/Product',product.product_id]">
+          <img [src]="product.product_images[0]" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{product.product_name}}</h5>
+            <div class="d-flex justify-content-between gap-2">
+              <p class="card-text">{{product.product_description}}</p>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary btn-sm"
+                        (click)="$event.stopPropagation(); toggleCart(product.product_id)"
+                        [ngClass]="product.in_cart?'bi-cart-fill text-light btn btn-primary' : 'bi-cart btn btn-outline-primary'"
+                        title="Add to Cart">
+                </button>
+
+                <button class=" btn-sm"
+                        (click)="$event.stopPropagation();
+                        toggleFavourite(product.product_id)"
+                        title="Add to Favorite"
+                        [ngClass]="product.is_favorite?'bi-heart-fill text-light btn btn-danger' : 'bi-heart btn btn-outline-danger'"
+                >
+
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    }
+
+  </div>
+}
+<app-footer></app-footer>
+
+

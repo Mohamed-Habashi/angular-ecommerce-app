@@ -1,0 +1,86 @@
+@if (isLoading()) {
+  <p>Data is loading</p>
+}@else{
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="main-img">
+          <img class=" mImage" [src]="productDetails()?.data?.product_images?.[0]" alt="ProductS">
+          <div class="row my-3 previews">
+            @for (image of productDetails()?.data?.product_images ; track $index) {
+              <div class="col-md-3">
+                <img class="w-100" [src]="image" alt="Sale">
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="main-description px-2">
+          <div class="category text-bold">
+           Category: {{productDetails()?.data?.product_category}}
+          </div>
+          <div class="product-title text-bold my-3">
+            {{ productDetails()?.data?.product_name }}
+          </div>
+
+          <div class="price-area my-4">
+            <p class="new-price text-bold mb-1">{{productDetails()?.data?.product_price|currency}}</p>
+            <p class="text-secondary mb-1">(Additional tax may apply on checkout)</p>
+
+          </div>
+
+
+          <div class="buttons d-flex my-5">
+            <div class="block">
+              <a href="#" class="shadow btn custom-btn ">Wishlist</a>
+            </div>
+            @if (!productDetails()?.data?.in_cart) {
+              <div class="block">
+                <button class="shadow btn custom-btn">{{!productDetails()?.data?.in_cart}}</button>
+              </div>
+            }
+
+
+            <div class="block quantity">
+              <input type="number" class="form-control" id="cart_quantity" value="1" min="0" max="5" placeholder="Enter email" name="cart_quantity">
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+        <div class="product-details my-4">
+          <p class="details-title text-color mb-1">Product Details</p>
+          <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat excepturi odio recusandae aliquid ad impedit autem commodi earum voluptatem laboriosam? </p>
+        </div>
+
+        <div class="row questions bg-light p-3">
+          <div class="col-md-1 icon">
+            <i class="fa-brands fa-rocketchat questions-icon"></i>
+          </div>
+          <div class="col-md-11 text">
+            Have a question about our products at E-Store? Feel free to contact our representatives via live chat or email.
+          </div>
+        </div>
+
+        <div class="delivery my-4">
+          <p class="font-weight-bold mb-0"><span><i class="fa-solid fa-truck"></i></span> <b>Delivery done in 3 days from date of purchase</b> </p>
+          <p class="text-secondary">Order now to get this product delivery</p>
+        </div>
+        <div class="delivery-options my-4">
+          <p class="font-weight-bold mb-0"><span><i class="fa-solid fa-filter"></i></span> <b>Delivery options</b> </p>
+          <p class="text-secondary">View delivery options here</p>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+}
+
+
+
+
